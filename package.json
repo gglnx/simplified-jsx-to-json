@@ -1,0 +1,44 @@
+{
+  "name": "simplified-jsx-to-json",
+  "version": "0.1.0",
+  "description": "Converts basic JSX code into a JSON representation, which can be used by React.createElement",
+  "keywords": [
+    "jsx",
+    "convert",
+    "json",
+    "createElement",
+    "react",
+    "ast"
+  ],
+  "main": "index.js",
+  "repository": "https://github.com/gglnx/simplified-jsx-to-json",
+  "author": {
+    "name": "Dennis Morhardt",
+    "email": "info@dennismorhardt.de",
+    "url": "https://dennismorhardt.de"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "test": "ava && tsd"
+  },
+  "files": [
+    "index.js",
+    "possible-standard-names.js",
+    "index.d.ts"
+  ],
+  "dependencies": {
+    "acorn": "^7.1.1",
+    "acorn-jsx": "^5.2.0",
+    "html-tag-names": "^1.1.5",
+    "is-string": "^1.0.5",
+    "style-to-object": "^0.3.0",
+    "svg-tag-names": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^3.5.1",
+    "tsd": "^0.11.0"
+  }
+}
