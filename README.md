@@ -21,7 +21,7 @@ jsxToJson('<Test myProp={true}>My Child</Test>');
 
 * `<Test />`: Self-closing JSX tags
 * `<Test myProp="string">`: String props
-* `<Test myProp={\`string\`}>`: Template props
+* `` <Test myProp={`string`}> ``: Template props
 * `<Test myProp>`: True props
 * `<Test myProp={false}>`: Boolean props
 * `<Test myProp={34}>`: Number props
