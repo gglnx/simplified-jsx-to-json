@@ -1,4 +1,6 @@
-# simplified-jsx-to-json [![Build Status](https://travis-ci.org/gglnx/simplified-jsx-to-json.svg?branch=master)](https://travis-ci.org/gglnx/simplified-jsx-to-json)
+# simplified-jsx-to-json
+
+[![Build Status](https://travis-ci.org/gglnx/simplified-jsx-to-json.svg?branch=master)](https://travis-ci.org/gglnx/simplified-jsx-to-json) [![npm version](https://img.shields.io/npm/v/simplified-jsx-to-json)](https://www.npmjs.com/package/simplified-jsx-to-json) ![npm downloads](https://img.shields.io/npm/dm/simplified-jsx-to-json)
 
 > Converts simplified JSX code into a JSON representation, which can be used by `React.createElement`
 
