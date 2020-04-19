@@ -12,6 +12,16 @@ test('main', (t) => {
   t.deepEqual(jsxToJson('<Test />'), [['Test', {}]]);
   t.deepEqual(jsxToJson('<Test test />'), [['Test', { test: true }]]);
   t.deepEqual(jsxToJson('<Test test="test" />'), [['Test', { test: 'test' }]]);
+  t.deepEqual(jsxToJson('<Test test={`test`} />'), [
+    ['Test', { test: 'test' }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={`test ${1}`} />'), [
+    ['Test', { test: 'test 1' }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={`test ${["Test"]}`} />'), [
+    ['Test', { test: 'test Test' }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={test} />'), [['Test', { test: 'test' }]]);
   t.deepEqual(jsxToJson('<Test test={1} />'), [['Test', { test: 1 }]]);
   t.deepEqual(jsxToJson('<Test test={false} />'), [['Test', { test: false }]]);
   t.deepEqual(jsxToJson('<Test test={["Test"]} />'), [
@@ -19,15 +29,7 @@ test('main', (t) => {
   ]);
 
   // Unsupported syntax
-  t.throws(() => jsxToJson('<Test test={`Test`} />'), {
-    instanceOf: SyntaxError,
-  });
-
-  t.throws(() => jsxToJson('<Test test={test} />'), {
-    instanceOf: SyntaxError,
-  });
-
-  t.throws(() => jsxToJson('<Test test={BinaryExpression} />'), {
+  t.throws(() => jsxToJson('<Test test={3 + 3} />'), {
     instanceOf: SyntaxError,
   });
 

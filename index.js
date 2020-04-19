@@ -28,6 +28,24 @@ const getAttributeValue = (expression) => {
     return expression.elements.map((element) => getAttributeValue(element));
   }
 
+  if (expression.type === 'TemplateLiteral') {
+    const expressions = expression.expressions.map((element) => ({
+      ...element,
+      value: {
+        raw: element.value,
+        cooked: getAttributeValue(element),
+      },
+    }));
+
+    return expressions
+      .concat(expression.quasis)
+      .sort((elementA, elementB) => elementA.start - elementB.start)
+      .reduce(
+        (string, element) => `${string}${element.value.cooked.toString()}`,
+        '',
+      );
+  }
+
   if (expression.type === 'ObjectExpression') {
     const entries = expression.properties
       .map((property) => {
