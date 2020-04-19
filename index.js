@@ -130,9 +130,19 @@ const jsxToJson = (input) => {
     throw new TypeError('Expected a string');
   }
 
-  const parsed = acorn.Parser.extend(jsx({ allowNamespaces: false })).parse(
-    `<root>${input}</root>`,
-  );
+  let parsed = null;
+  try {
+    parsed = acorn.Parser.extend(jsx({ allowNamespaces: false })).parse(
+      `<root>${input}</root>`,
+    );
+  } catch (e) {
+    throw new SyntaxError(
+      JSON.stringify({
+        location: e.loc,
+        validationError: `Could not parse "${input}"`,
+      }),
+    );
+  }
 
   if (parsed.body[0]) {
     return parsed.body[0].expression.children
