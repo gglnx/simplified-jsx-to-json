@@ -28,8 +28,51 @@ test('main', (t) => {
     ['Test', { test: ['Test'] }],
   ]);
 
+  // Binary expressions: Arithmetic operators
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators
+  t.deepEqual(jsxToJson('<Test test={3 + 3} />'), [['Test', { test: 6 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 + 3 + 3} />'), [['Test', { test: 9 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 - 3} />'), [['Test', { test: 0 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 * 3} />'), [['Test', { test: 9 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 ** 3} />'), [['Test', { test: 27 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 / 3} />'), [['Test', { test: 1 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 % 3} />'), [['Test', { test: 0 }]]);
+
+  // Binary expressions: Comparison operators
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators
+  t.deepEqual(jsxToJson('<Test test={3 == "3"} />'), [
+    ['Test', { test: true }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={3 === "3"} />'), [
+    ['Test', { test: false }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={3 != "3"} />'), [
+    ['Test', { test: false }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={3 !== "3"} />'), [
+    ['Test', { test: true }],
+  ]);
+  t.deepEqual(jsxToJson('<Test test={3 > 4} />'), [['Test', { test: false }]]);
+  t.deepEqual(jsxToJson('<Test test={3 >= 3} />'), [['Test', { test: true }]]);
+  t.deepEqual(jsxToJson('<Test test={3 < 4} />'), [['Test', { test: true }]]);
+  t.deepEqual(jsxToJson('<Test test={3 <= 3} />'), [['Test', { test: true }]]);
+
+  // Binary expressions: Bitwise Operators
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators
+  t.deepEqual(jsxToJson('<Test test={3 << 3} />'), [['Test', { test: 24 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 >> 3} />'), [['Test', { test: 0 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 >>> 3} />'), [['Test', { test: 0 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 | 3} />'), [['Test', { test: 3 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 & 3} />'), [['Test', { test: 3 }]]);
+  t.deepEqual(jsxToJson('<Test test={3 ^ 3} />'), [['Test', { test: 0 }]]);
+
+  // Unary expressions
+  t.deepEqual(jsxToJson('<Test test={-2} />'), [['Test', { test: -2 }]]);
+  t.deepEqual(jsxToJson('<Test test={+2} />'), [['Test', { test: 2 }]]);
+  t.deepEqual(jsxToJson('<Test test={~2} />'), [['Test', { test: -3 }]]);
+
   // Unsupported syntax
-  t.throws(() => jsxToJson('<Test test={3 + 3} />'), {
+  t.throws(() => jsxToJson('<Test test={"test" in test}>{test}</Test>'), {
     instanceOf: SyntaxError,
   });
 

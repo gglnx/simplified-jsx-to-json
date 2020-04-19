@@ -70,6 +70,130 @@ const getAttributeValue = (expression) => {
     return expression.name;
   }
 
+  if (expression.type === 'BinaryExpression') {
+    switch (expression.operator) {
+      case '+':
+        return (
+          getAttributeValue(expression.left) +
+          getAttributeValue(expression.right)
+        );
+      case '-':
+        return (
+          getAttributeValue(expression.left) -
+          getAttributeValue(expression.right)
+        );
+      case '*':
+        return (
+          getAttributeValue(expression.left) *
+          getAttributeValue(expression.right)
+        );
+      case '**':
+        return (
+          getAttributeValue(expression.left) **
+          getAttributeValue(expression.right)
+        );
+      case '/':
+        return (
+          getAttributeValue(expression.left) /
+          getAttributeValue(expression.right)
+        );
+      case '%':
+        return (
+          getAttributeValue(expression.left) %
+          getAttributeValue(expression.right)
+        );
+      case '==':
+        return (
+          getAttributeValue(expression.left) ==
+          getAttributeValue(expression.right)
+        );
+      case '===':
+        return (
+          getAttributeValue(expression.left) ===
+          getAttributeValue(expression.right)
+        );
+      case '!=':
+        return (
+          getAttributeValue(expression.left) !=
+          getAttributeValue(expression.right)
+        );
+      case '!==':
+        return (
+          getAttributeValue(expression.left) !==
+          getAttributeValue(expression.right)
+        );
+      case '<':
+        return (
+          getAttributeValue(expression.left) <
+          getAttributeValue(expression.right)
+        );
+      case '<=':
+        return (
+          getAttributeValue(expression.left) <=
+          getAttributeValue(expression.right)
+        );
+      case '>':
+        return (
+          getAttributeValue(expression.left) >
+          getAttributeValue(expression.right)
+        );
+      case '>=':
+        return (
+          getAttributeValue(expression.left) >=
+          getAttributeValue(expression.right)
+        );
+      case '<<':
+        return (
+          getAttributeValue(expression.left) <<
+          getAttributeValue(expression.right)
+        );
+      case '>>':
+        return (
+          getAttributeValue(expression.left) >>
+          getAttributeValue(expression.right)
+        );
+      case '>>>':
+        return (
+          getAttributeValue(expression.left) >>>
+          getAttributeValue(expression.right)
+        );
+      case '|':
+        return (
+          getAttributeValue(expression.left) |
+          getAttributeValue(expression.right)
+        );
+      case '&':
+        return (
+          getAttributeValue(expression.left) &
+          getAttributeValue(expression.right)
+        );
+      case '^':
+        return (
+          getAttributeValue(expression.left) ^
+          getAttributeValue(expression.right)
+        );
+      default:
+        throw new SyntaxError(
+          `BinaryExpression with "${expression.operator}" is not supported`,
+        );
+    }
+  }
+
+  if (expression.type === 'UnaryExpression') {
+    switch (expression.operator) {
+      case '+':
+        return +getAttributeValue(expression.argument);
+      case '-':
+        return -getAttributeValue(expression.argument);
+      case '~':
+        return ~getAttributeValue(expression.argument);
+      default:
+        throw new SyntaxError(
+          `UnaryExpression with "${expression.operator}" is not supported`,
+        );
+    }
+  }
+
   // Unsupported type
   throw new SyntaxError(`${expression.type} is not supported`);
 };

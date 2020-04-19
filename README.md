@@ -25,14 +25,11 @@ jsxToJson('<Test myProp={true}>My Child</Test>');
 * `<Test myProp>`: True props
 * `<Test myProp={false}>`: Boolean props
 * `<Test myProp={34}>`: Number props
+* `<Test myProp={3 + 3 + 3}>`: Props with arithmetic, comparison or bitwise operators
 * `<Test myProp={['Test', true, 34]}>`: Arrays (with strings, numbers or booleans)
 * `<Test myProp={{ test: 34 }}>`: Objects with string keys and string, number or boolean value
 * `<>Test</>`: Fragments
 * HTML/SVG DOM attributes are converted to correct React equivalent (`class` -> `className`)
-
-## ToDos
-
-* [ ] Add support for binary expressions (`3 + 3`) in props
 
 ## License
 
