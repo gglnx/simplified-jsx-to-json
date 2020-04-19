@@ -66,6 +66,10 @@ const getAttributeValue = (expression) => {
     return entries;
   }
 
+  if (expression.type === 'Identifier') {
+    return expression.name;
+  }
+
   // Unsupported type
   throw new SyntaxError(`${expression.type} is not supported`);
 };
