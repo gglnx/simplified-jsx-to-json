@@ -194,6 +194,10 @@ const getAttributeValue = (expression) => {
     }
   }
 
+  if (expression.type === 'JSXElement') {
+    return getNode(expression);
+  }
+
   // Unsupported type
   throw new SyntaxError(`${expression.type} is not supported`);
 };
